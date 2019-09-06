@@ -21,10 +21,15 @@ func main() {
 		pressure: 100,
 	}
 
-	_ = NewCurrentConditionDisplayer(&weatherData)
-	_ = NewStatisticsDisplayer(&weatherData)
+	newCurrentConditionDisplayer := NewCurrentConditionDisplayer(&weatherData)
+	newStatisticsDisplayer := NewStatisticsDisplayer(&weatherData)
 
 	weatherData.SetMeasurements(200, 200, 200)
 	weatherData.SetMeasurements(300, 200, 200)
 	weatherData.SetMeasurements(400, 400, 400)
+
+	newCurrentConditionDisplayer.removeObserver()
+	newStatisticsDisplayer.removeObserver()
+
+	weatherData.SetMeasurements(1000, 1000, 1000)
 }

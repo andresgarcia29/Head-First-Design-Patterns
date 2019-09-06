@@ -27,6 +27,10 @@ func (c *CurrentConditionDisplayer) display() {
 	fmt.Printf("CurrentConditionDisplayer:\tThe current condition is %f with %f of humidity\n", c.temp, c.humidity)
 }
 
+func (c *CurrentConditionDisplayer) removeObserver() {
+	c.subject.RemoveObserver(c)
+}
+
 type StatisticsDisplayer struct {
 	subject  Subject
 	temp     float64
@@ -50,4 +54,8 @@ func (s *StatisticsDisplayer) update(temp float64, humidity float64, pressure fl
 
 func (s *StatisticsDisplayer) display() {
 	fmt.Printf("StatisticsDisplayer:\t\tThe current mean of all the measurements is %f\n", (s.temp+s.humidity+s.pressure)/3)
+}
+
+func (s *StatisticsDisplayer) removeObserver() {
+	s.subject.RemoveObserver(s)
 }

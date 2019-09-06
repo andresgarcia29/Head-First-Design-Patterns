@@ -1,7 +1,5 @@
 package main
 
-import "fmt"
-
 type WeatherData struct {
 	observers []Observer
 	temp      float64
@@ -21,12 +19,11 @@ func (w *WeatherData) AddObserver(o Observer) {
 }
 
 func (w *WeatherData) RemoveObserver(o Observer) {
-	for _, observer := range w.observers {
+	for i, observer := range w.observers {
 		if observer == o {
-			fmt.Println("We are the same!")
+			w.observers = append(w.observers[:i], w.observers[:i]...)
 		}
 	}
-	w.observers = append(w.observers, o)
 }
 
 func (w *WeatherData) NotifyObservers() {
